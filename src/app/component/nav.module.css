@@ -1,0 +1,24 @@
+/* 네브스타일 */
+.navContainer {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.navStyle {
+  font-family: "Rajdhani";
+  position: relative;
+  text-decoration: none;
+  width: 25%;
+  font-size: var(--font-size-regular);
+  text-align: center;
+  color: #f9f9f9;
+  font-weight: 400;
+}
+.menubtnDiv {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  flex: inherit;
+}

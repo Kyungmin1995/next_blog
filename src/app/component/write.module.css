@@ -1,0 +1,26 @@
+.writeContainer {
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.writeInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contentBox {
+  background-color: #ddd;
+  min-height: 300px;
+  border: 1px solid #ddd;
+  padding: 10;
+  position: relative;
+}
+.contentAdd {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

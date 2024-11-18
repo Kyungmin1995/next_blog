@@ -1,0 +1,685 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+
+  --font-size-small: 0.8rem;
+  --font-size-regular: 1rem;
+  --font-size-medium: 1.5rem;
+  --font-size-large: 2rem;
+
+  --pd20: 20px;
+  --pdb20: 20px;
+  --pdb40: 40px;
+  --pdt20: 20px;
+  --pdt40: 40px;
+}
+
+@media (min-width: 480px) {
+  :root {
+    --font-size-regular: 1.25rem;
+    --font-size-medium: 2rem;
+    --font-size-large: 2.75rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .navItem {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --font-size-regular: 1.5rem;
+    --font-size-medium: 2.5rem;
+    --font-size-large: 3.5rem;
+  }
+  .navItem {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+h1 {
+  font-size: var(--font-size-large);
+}
+h2 {
+  font-size: var(--font-size-medium);
+}
+h3,
+p,
+a {
+  font-size: var(--font-size-regular);
+  margin: 0;
+}
+span {
+  font-size: var(--font-size-small);
+}
+
+body,
+.menumodal {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+/* 패딩 */
+.pd20 {
+  padding: var(--pd20);
+}
+.pdb20 {
+  padding-bottom: var(--pd20);
+}
+.pdb40 {
+  padding-bottom: var(--pdb40);
+}
+
+/* 폰트 */
+
+/* 컨테이너 */
+.container {
+  padding: var(--pd20) var(--pdt20);
+  /* padding: var(--pd20); */
+  /* padding-top: var(--pdt40); */
+  margin: 0 auto;
+  /* max-width: 1980px; */
+}
+/* 네브스타일 */
+.navContainer {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.navStyle {
+  font-family: "Rajdhani";
+  position: relative;
+  text-decoration: none;
+  width: 25%;
+  font-size: var(--font-size-regular);
+  text-align: center;
+
+  color: #f9f9f9;
+  font-weight: 400;
+}
+.menubtnDiv {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+  flex: inherit;
+}
+.menubtn {
+  background: #fff;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: calc(50% - 3px);
+  transform: translateY(-50%);
+  transition: 0.2s all;
+}
+.menubtn.active {
+  height: 0px;
+}
+/* 햄버거 */
+.menubtn::before {
+  content: "";
+  position: absolute;
+  width: 85%;
+  height: 1px;
+  background: #fff;
+  animation: menuTop 0.2s both;
+}
+
+@keyframes menuTop {
+  100% {
+    width: 100%;
+    transform: translate(0px, -12px);
+    background: #7b7575;
+  }
+}
+@keyframes menuBottom {
+  100% {
+    width: 100%;
+    transform: translate(0px, 12px);
+    background: #7b7575;
+  }
+}
+
+.menubtn::after {
+  content: "";
+  position: absolute;
+  width: 90%;
+  height: 1px;
+  background: #fff;
+
+  animation: menuBottom 0.2s both;
+}
+.menubtn.active::before {
+  animation: menuActiveTop 0.5s both;
+}
+.menubtn.active::after {
+  animation: menuActive 0.5s both;
+}
+@keyframes menuActiveTop {
+  10% {
+    transform: translate(0px, -12px);
+  }
+  40% {
+    transform: rotate(0deg);
+    transform: translate(0px, 0px);
+    background: #fff;
+  }
+  80% {
+    transform: rotate(0deg);
+    transform: translate(0px, 0px);
+    background: #fff;
+  }
+  100% {
+    transform: rotate(45deg);
+    width: 100%;
+    background: #7b7575;
+  }
+}
+@keyframes menuActive {
+  10% {
+    transform: translate(0px, 12px);
+  }
+  40% {
+    transform: translate(0px, 0px);
+    transform: rotate(0deg);
+    background: #fff;
+  }
+  80% {
+    transform: translate(0px, 0px);
+    transform: rotate(0deg);
+    background: #fff;
+  }
+  100% {
+    transform: rotate(-45deg);
+    background: #7b7575;
+    width: 100%;
+  }
+}
+
+.full-menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  height: calc(100vh - 60px);
+  justify-content: center;
+  gap: 20px;
+}
+
+/*  */
+
+.navStyle:hover::after {
+  width: 40%;
+  background: #fff;
+}
+.navStyle:hover::before {
+  width: 40%;
+  background: #fff;
+}
+.navStyle::after {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  display: block;
+  width: 0px;
+  left: 50%;
+  height: 0.5px;
+  background: #3b3a3a;
+  /* margin-top: 15px; */
+  transition: 0.2s all;
+}
+.navStyle::before {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  display: block;
+  width: 0px;
+  right: 50%;
+  height: 0.5px;
+  background: #3b3a3a;
+  /* margin-top: 15px; */
+  transition: 0.2s all;
+}
+.navItem {
+  /* margin-left: 80px; */
+  display: flex;
+  /* gap: 40px; */
+}
+.title {
+  border-bottom: 0.2px solid #505050;
+  width: 15%;
+}
+.title::after {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 0.5px;
+  background: #ddd;
+  margin-top: 15px;
+  transition: 0.2s all;
+}
+.title:hover::after {
+  background: #fff;
+  width: 100%;
+}
+
+.slide-left {
+  -webkit-animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  opacity: 0;
+  animation-delay: 0.5s;
+}
+.slide-right {
+  -webkit-animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  opacity: 0;
+}
+.none {
+  display: none;
+}
+
+/* 로딩스피너 */
+.lodingCon {
+  background: rgb(49, 48, 48);
+  width: 100%;
+  height: calc(100vh - 80px);
+  position: absolute;
+  opacity: 0;
+  animation: spinners-background-hide 2s;
+}
+.spiner {
+  display: inherit;
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  animation: react-spinners-MoonLoader-moon 0.6s 0s infinite linear;
+  animation-fill-mode: forwards;
+  left: 50%;
+  top: 50%;
+}
+.spiner > span:first-child {
+  width: 7.142857142857143px;
+  height: 7.142857142857143px;
+  border-radius: 100%;
+  background-color: #36d7b7;
+  opacity: 0.8;
+  position: absolute;
+  top: 21.428571428571427px;
+  animation: react-spinners-MoonLoader-moon 0.6s 0s infinite linear;
+  animation-fill-mode: forwards;
+}
+
+.spiner > span:last-child {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 7.142857142857143px solid #36d7b7;
+  opacity: 0.1;
+  box-sizing: content-box;
+  position: absolute;
+}
+@keyframes spinners-background-hide {
+  10% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes react-spinners-MoonLoader-moon {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+@keyframes slide-right {
+  0% {
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+.slide-top {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-40px);
+    opacity: 1;
+  }
+}
+
+/*  */
+.backStyle {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+  background: #1c1c1c9e;
+}
+.backStyle > div {
+  position: absolute;
+  top: 50%;
+  background: #fff;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  animation: back-top-scale 1s both;
+}
+
+@keyframes back-top-scale {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+
+  60% {
+    transform: translate(-50%, -50%) scale(6);
+    opacity: 0.8;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(40);
+    opacity: 0;
+  }
+}
+
+/* 소개 */
+.AboutMe {
+  position: relative;
+  animation: AboutMe 1s both;
+}
+.aboutFont {
+  font-family: "Chosunilbo_myungjo";
+  line-height: 1.85;
+  word-break: keep-all;
+  font-size: var(--font-size-regular);
+}
+
+@font-face {
+  font-family: "Pokemon";
+  font-size: 14px;
+  src: url(../../public/pokemon.ttf);
+}
+
+.statusbar,
+.statusbar2 {
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  /* min-width: 339px; */
+  max-width: 600px;
+  font-family: "Pokemon";
+  margin: 50px auto 0;
+}
+.btn {
+  animation: game 0.5s infinite;
+  cursor: pointer;
+}
+.statusbar > div img {
+  animation: game 1.5s 2s infinite;
+}
+.statusbar > div img,
+.statusbar2 > div img {
+  /* width: 150px; */
+  margin: 0 auto;
+  opacity: 1;
+}
+
+.statusbar > div:first-child,
+.statusbar2 > div:first-child {
+  border-radius: 5px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.statusbar > div:last-child,
+.statusbar2 > div:last-child {
+  border-radius: 5px;
+  border: 3px solid #000;
+  padding: 4px;
+  border-bottom: 5px solid #000;
+}
+.statusbar > div > div.txtBox,
+.statusbar2 > div > div.txtBox {
+  background: #fff;
+  border-radius: 5px;
+  border: 3px solid #000;
+  border-top: 6px solid #000;
+  border-left: 3.5px solid;
+  border-right: 3.5px solid;
+  color: #000;
+  padding: 6px;
+}
+
+.statusbar > div > div:last-child p,
+.statusbar2 > div > div:last-child p {
+  opacity: 1;
+}
+@keyframes game {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes AboutMe {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  90% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+.eventFont {
+  position: absolute;
+  border-bottom: 1px solid #5b5b5b;
+}
+.eventFont::after {
+  content: "";
+  width: 0%;
+  height: 1px;
+  background: #fff;
+  display: block;
+  animation: timeOut 3s 3s both;
+}
+@keyframes timeOut {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.dot-bottom,
+.dot-top,
+.dot-top-bottom,
+.dot-bottom-top {
+  position: relative;
+}
+.dot-bottom span,
+.dot-top-bottom span,
+.dot-bottom-top span,
+.dot-top span {
+  background: #fff;
+  text-indent: -9999px;
+  width: 5px;
+  height: 5px;
+}
+
+.dot-bottom-top span:first-child,
+.dot-bottom span:first-child,
+.dot-top span:first-child {
+  position: absolute;
+  left: -1.5px;
+  top: -2px;
+}
+.dot-bottom-top span:last-child,
+.dot-bottom span:last-child,
+.dot-top span:last-child {
+  position: absolute;
+  right: -1.5px;
+  top: -2px;
+}
+.dot-top-bottom span:first-child {
+  background: #000;
+  left: 2px;
+  bottom: -10px;
+  position: absolute;
+}
+.dot-top-bottom span:last-child {
+  background: #000;
+  right: 2px;
+  bottom: -10px;
+  position: absolute;
+}
+.dot-bottom-top span:first-child {
+  position: absolute;
+  left: 1px;
+  top: -6px;
+  background: #000;
+  width: 4px;
+  height: 4px;
+}
+.dot-bottom-top span:last-child {
+  position: absolute;
+  right: 1px;
+  top: -6px;
+  background: #000;
+  width: 4px;
+  height: 4px;
+}
+/* 포트폴리오 */
+
+.port_con {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.port_con > div {
+  width: calc(33% - 30px);
+  text-align: center;
+}
+.port_con > div h4 {
+  margin-top: 20px;
+}
+.item_con {
+  background: #282828;
+}
+.card_style {
+  overflow: hidden;
+  display: flex;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 1px 5px 11px 3px rgba(0, 0, 0, 0.25);
+}
+.card_style a {
+  display: flex;
+}
+.card_style:hover {
+  transform: scale(1.1);
+  transition: 0.2s all ease-in-out;
+}
+
+.m_navItem {
+  display: none;
+}
+@media (max-width: 640px) {
+  .navItem {
+    display: none;
+  }
+  .m_navItem {
+    display: block;
+  }
+  .port_con > div {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (min-width: 1024px) {
+}
